@@ -1,5 +1,6 @@
 // Service Worker for Lite Rain PWA
-const CACHE_NAME = 'lite-rain-v1';
+// Last deployment: 2026-01-29T08:45:30.347Z
+const CACHE_NAME = 'lite-rain-v2';
 const urlsToCache = [
   '/',
   '/index.html',
