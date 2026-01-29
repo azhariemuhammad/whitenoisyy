@@ -2,7 +2,8 @@
 const CACHE_NAME = 'lite-rain-v1';
 const urlsToCache = [
   '/',
-  '/index.html'
+  '/index.html',
+  '/manifest.json'
 ];
 
 // Install event - cache resources
@@ -48,7 +49,7 @@ self.addEventListener('fetch', (event) => {
         
         return fetch(fetchRequest).then((response) => {
           // Check if valid response
-          if (!response || response.status !== 200 || response.type !== 'basic') {
+          if (!response || response.status !== 200 || response.type === 'error') {
             return response;
           }
           
@@ -58,9 +59,16 @@ self.addEventListener('fetch', (event) => {
           caches.open(CACHE_NAME)
             .then((cache) => {
               cache.put(event.request, responseToCache);
+            })
+            .catch((error) => {
+              console.log('Cache storage failed:', error);
             });
           
           return response;
+        }).catch((error) => {
+          // Network failed, return cached offline fallback if available
+          console.log('Fetch failed:', error);
+          throw error;
         });
       })
   );
