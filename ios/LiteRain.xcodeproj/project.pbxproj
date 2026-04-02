@@ -1,0 +1,240 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3A0000012E10000100000001 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0000012E00000100000001 /* AppDelegate.swift */; };
+		3A0000012E10000200000001 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0000012E00000200000001 /* SceneDelegate.swift */; };
+		3A0000012E10000300000001 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0000012E00000300000001 /* MainViewController.swift */; };
+		3A0000012E10000400000001 /* PinkNoiseEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0000012E00000400000001 /* PinkNoiseEngine.swift */; };
+		3A0000012E10000500000001 /* PlaybackStateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0000012E00000500000001 /* PlaybackStateStore.swift */; };
+		3A0000012E10000600000001 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0000012E00000600000001 /* Haptics.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3A0000012E00000100000001 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3A0000012E00000200000001 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		3A0000012E00000300000001 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		3A0000012E00000400000001 /* PinkNoiseEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinkNoiseEngine.swift; sourceTree = "<group>"; };
+		3A0000012E00000500000001 /* PlaybackStateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackStateStore.swift; sourceTree = "<group>"; };
+		3A0000012E00000600000001 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
+		3A0000012E00001000000001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A0000012E00001100000001 /* LiteRain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = LiteRain.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3A0000012E00002100000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3A0000012E00003000000001 = {
+			isa = PBXGroup;
+			children = (
+				3A0000012E00003100000001 /* LiteRain */,
+				3A0000012E00004000000001 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3A0000012E00003100000001 /* LiteRain */ = {
+			isa = PBXGroup;
+			path = LiteRain;
+			sourceTree = "<group>";
+			children = (
+				3A0000012E00000100000001 /* AppDelegate.swift */,
+				3A0000012E00000200000001 /* SceneDelegate.swift */,
+				3A0000012E00000300000001 /* MainViewController.swift */,
+				3A0000012E00000400000001 /* PinkNoiseEngine.swift */,
+				3A0000012E00000500000001 /* PlaybackStateStore.swift */,
+				3A0000012E00000600000001 /* Haptics.swift */,
+				3A0000012E00001000000001 /* Info.plist */,
+			);
+		};
+		3A0000012E00004000000001 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3A0000012E00001100000001 /* LiteRain.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3A0000012E00005000000001 /* LiteRain */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3A0000012E00007000000001 /* Build configuration list for PBXNativeTarget "LiteRain" */;
+			buildPhases = (
+				3A0000012E00002000000001 /* Sources */,
+				3A0000012E00002100000001 /* Frameworks */,
+				3A0000012E00002200000001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LiteRain;
+			productName = LiteRain;
+			productReference = 3A0000012E00001100000001 /* LiteRain.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3A0000012E00006000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					3A0000012E00005000000001 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+				};
+			};
+			buildConfigurationList = 3A0000012E00007100000001 /* Build configuration list for PBXProject "LiteRain" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3A0000012E00003000000001;
+			productRefGroup = 3A0000012E00004000000001 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3A0000012E00005000000001 /* LiteRain */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3A0000012E00002200000001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3A0000012E00002000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A0000012E10000100000001 /* AppDelegate.swift in Sources */,
+				3A0000012E10000200000001 /* SceneDelegate.swift in Sources */,
+				3A0000012E10000300000001 /* MainViewController.swift in Sources */,
+				3A0000012E10000400000001 /* PinkNoiseEngine.swift in Sources */,
+				3A0000012E10000500000001 /* PlaybackStateStore.swift in Sources */,
+				3A0000012E10000600000001 /* Haptics.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3A0000012E00008000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = LiteRain/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.azhariemuhammad.literain;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		3A0000012E00008100000001 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = LiteRain/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.azhariemuhammad.literain;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		3A0000012E00008200000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		3A0000012E00008300000001 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3A0000012E00007000000001 /* Build configuration list for PBXNativeTarget "LiteRain" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A0000012E00008000000001 /* Debug */,
+				3A0000012E00008100000001 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3A0000012E00007100000001 /* Build configuration list for PBXProject "LiteRain" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A0000012E00008200000001 /* Debug */,
+				3A0000012E00008300000001 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3A0000012E00006000000001 /* Project object */;
+}
