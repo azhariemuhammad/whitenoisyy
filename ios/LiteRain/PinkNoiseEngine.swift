@@ -6,37 +6,25 @@ final class PinkNoiseEngine {
     private(set) var volume: Double = 0.7
 
     private let engine = AVAudioEngine()
-    private let sourceNode: AVAudioSourceNode
+    private let playerNode = AVAudioPlayerNode()
     private let mixer = AVAudioMixerNode()
+    private let format = AVAudioFormat(standardFormatWithSampleRate: 44_100, channels: 1)!
+    private let bufferFrameCount: AVAudioFrameCount = 4_096
     private let stateStore = PlaybackStateStore()
     private let queue = DispatchQueue(label: "LiteRain.PinkNoise")
     private let pinkStateLock = NSLock()
     private var pinkState = PinkFilterState()
+    private var shouldKeepScheduling = false
+    private var isScheduling = false
 
     init() {
-        let format = AVAudioFormat(standardFormatWithSampleRate: 44_100, channels: 1)!
-        sourceNode = AVAudioSourceNode { [weak self] _, _, frameCount, audioBufferList -> OSStatus in
-            guard let self else { return noErr }
-            let ablPointer = UnsafeMutableAudioBufferListPointer(audioBufferList)
-            let frames = Int(frameCount)
-            for buffer in ablPointer {
-                guard let channelData = buffer.mData?.assumingMemoryBound(to: Float.self) else { continue }
-                self.pinkStateLock.lock()
-                for frame in 0..<frames {
-                    let white = Float.random(in: -1...1)
-                    channelData[frame] = self.pinkState.nextSample(white: white)
-                }
-                self.pinkStateLock.unlock()
-            }
-            return noErr
-        }
-        sourceNode.volume = 1.0
+        playerNode.volume = 1.0
 
         setupAudioSession()
 
-        engine.attach(sourceNode)
+        engine.attach(playerNode)
         engine.attach(mixer)
-        engine.connect(sourceNode, to: mixer, format: format)
+        engine.connect(playerNode, to: mixer, format: format)
         engine.connect(mixer, to: engine.mainMixerNode, format: format)
         mixer.outputVolume = Float(volume)
     }
@@ -55,6 +43,13 @@ final class PinkNoiseEngine {
                     return
                 }
             }
+            self.shouldKeepScheduling = true
+            if !self.isScheduling {
+                self.scheduleNextBuffer()
+            }
+            if !self.playerNode.isPlaying {
+                self.playerNode.play()
+            }
             DispatchQueue.main.async {
                 self.isPlaying = true
                 self.persistState()
@@ -64,7 +59,10 @@ final class PinkNoiseEngine {
 
     func pause() {
         queue.async {
+            self.shouldKeepScheduling = false
+            self.playerNode.stop()
             self.engine.pause()
+            self.isScheduling = false
             DispatchQueue.main.async {
                 self.isPlaying = false
                 self.persistState()
@@ -103,6 +101,39 @@ final class PinkNoiseEngine {
         } catch {
             // Session setup failure means playback may not start or may stop in background, but app remains usable.
         }
+    }
+
+    private func scheduleNextBuffer() {
+        guard shouldKeepScheduling else {
+            isScheduling = false
+            return
+        }
+        guard let buffer = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: bufferFrameCount) else {
+            isScheduling = false
+            return
+        }
+
+        let frames = Int(bufferFrameCount)
+        buffer.frameLength = bufferFrameCount
+        guard let channelData = buffer.floatChannelData?.pointee else {
+            isScheduling = false
+            return
+        }
+        pinkStateLock.lock()
+        for frame in 0..<frames {
+            let white = Float.random(in: -1...1)
+            channelData[frame] = pinkState.nextSample(white: white)
+        }
+        pinkStateLock.unlock()
+
+        isScheduling = true
+        playerNode.scheduleBuffer(buffer, completionHandler: { [weak self] in
+            guard let self else { return }
+            self.queue.async {
+                self.isScheduling = false
+                self.scheduleNextBuffer()
+            }
+        })
     }
 }
 
