@@ -1,10 +1,9 @@
 import AVFoundation
-import Combine
 import Foundation
 
-final class PinkNoiseEngine: ObservableObject {
-    @Published private(set) var isPlaying: Bool = false
-    @Published private(set) var volume: Double = 0.7
+final class PinkNoiseEngine {
+    private(set) var isPlaying: Bool = false
+    private(set) var volume: Double = 0.7
 
     private let engine = AVAudioEngine()
     private let mixer = AVAudioMixerNode()
