@@ -12,6 +12,7 @@ final class PinkNoiseEngine {
     private let bufferFrameCount: AVAudioFrameCount = 4_096
     private let stateStore = PlaybackStateStore()
     private let queue = DispatchQueue(label: "LiteRain.PinkNoise")
+    private let pinkStateLock = NSLock()
     private var pinkState = PinkFilterState()
     private var shouldKeepScheduling = false
     private var isScheduling = false
@@ -114,17 +115,22 @@ final class PinkNoiseEngine {
 
         let frames = Int(bufferFrameCount)
         buffer.frameLength = bufferFrameCount
-        if let channelData = buffer.floatChannelData?.pointee {
-            for frame in 0..<frames {
-                let white = Float.random(in: -1...1)
-                channelData[frame] = pinkState.nextSample(white: white)
-            }
+        guard let channelData = buffer.floatChannelData?.pointee else {
+            isScheduling = false
+            return
         }
+        pinkStateLock.lock()
+        for frame in 0..<frames {
+            let white = Float.random(in: -1...1)
+            channelData[frame] = pinkState.nextSample(white: white)
+        }
+        pinkStateLock.unlock()
 
         isScheduling = true
         playerNode.scheduleBuffer(buffer, completionHandler: { [weak self] in
             guard let self else { return }
             self.queue.async {
+                self.isScheduling = false
                 self.scheduleNextBuffer()
             }
         })
