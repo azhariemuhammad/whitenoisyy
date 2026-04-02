@@ -14,7 +14,7 @@ Native iOS version of the white-noise/rain app using UIKit + AVAudioEngine.
 - Deployment target: **iOS 12.0**
 
 ## Open and Run
-1. Open `/home/runner/work/whitenoisyy/whitenoisyy/ios/LiteRain.xcodeproj` in Xcode.
+1. Open `ios/LiteRain.xcodeproj` in Xcode.
 2. Select the **LiteRain** scheme.
 3. Build and run on a real iPhone.
 
