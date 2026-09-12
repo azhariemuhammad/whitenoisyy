@@ -316,6 +316,11 @@
 
         btn.addEventListener('click', togglePlay);
 
+        window.addEventListener('beforeunload', (event) => {
+            event.preventDefault();
+            event.returnValue = '';
+        });
+
     </script>
 </body>
 </html>
