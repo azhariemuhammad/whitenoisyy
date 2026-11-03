@@ -146,10 +146,11 @@
 
         <p id="status" role="status">No images selected.</p>
         <section class="results" id="results" aria-live="polite"></section>
-        <p class="note"><strong>Offline by design.</strong> Files stay in this browser and are never sent to a server. HEIC decoding depends on browser support: Safari and some mobile browsers support it natively; if your browser cannot decode HEIC, use a browser with HEIC support or convert it first.</p>
+        <p class="note"><strong>Offline by design.</strong> Files stay in this browser and are never sent to a server. HEIC decoding is bundled locally, so it works without an internet connection.</p>
     </main>
 
-    <script>
+        <script src="vendor/heic2any.min.js"></script>
+        <script>
         const dropZone = document.getElementById('dropZone');
         const fileInput = document.getElementById('fileInput');
         const formatSelect = document.getElementById('format');
@@ -171,6 +172,18 @@
         function outputName(file, format) {
             const base = file.name.replace(/\.[^.]+$/, '') || 'image';
             return base + '.' + (format === 'jpeg' ? 'jpg' : format);
+        }
+
+        function isHeic(file) {
+            return /image\/hei[cf]/i.test(file.type) || /\.(heic|heif)$/i.test(file.name);
+        }
+
+        async function decodeHeic(file) {
+            if (typeof heic2any !== 'function') {
+                throw new Error('HEIC support is unavailable. Try JPG or PNG.');
+            }
+            const converted = await heic2any({ blob: file, toType: 'image/png' });
+            return decodeImage(converted instanceof Blob ? converted : converted[0]);
         }
 
         async function decodeImage(file) {
@@ -237,13 +250,13 @@
 
             for (const file of selectedFiles) {
                 try {
-                    const image = await decodeImage(file);
+                    const image = await (isHeic(file) ? decodeHeic(file) : decodeImage(file));
                     const blob = await convertImage(image, format);
                     addResult(file, blob, outputName(file, format));
                     if (typeof image.close === 'function') image.close();
                     converted++;
                 } catch (error) {
-                    const reason = error && error.message ? error.message : 'unsupported image';
+                    const reason = error && error.message ? error.message : 'This image format is not supported by this browser.';
                     setStatus(file.name + ': ' + reason, true);
                 }
             }
@@ -251,7 +264,7 @@
             if (converted) {
                 setStatus(converted + ' image' + (converted === 1 ? '' : 's') + ' ready to download.');
             } else {
-                setStatus('No images could be converted in this browser.', true);
+                setStatus('No images were converted. Check the file format and try again.', true);
             }
         }
 
