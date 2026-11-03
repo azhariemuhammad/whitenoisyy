@@ -165,9 +165,30 @@
             font-size: 12px;
             opacity: 0.3;
         }
+
+        .transformer-link {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+            color: var(--text-color);
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-decoration: none;
+            text-transform: uppercase;
+            opacity: 0.65;
+        }
+
+        .transformer-link:hover,
+        .transformer-link:focus {
+            color: white;
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
+
+    <a class="transformer-link" href="transformer.html">Image Transformer</a>
 
     <!-- Visual Layer -->
     <div class="rain-container">
